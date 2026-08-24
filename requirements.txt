@@ -1,0 +1,10 @@
+numpy==2.2.6
+pandas==2.3.3
+pyserial==3.5
+pyshimmer==1.0.0
+python-dateutil==2.9.0.post0
+pytz==2026.3.post1
+readchar==4.2.2
+six==1.17.0
+tobii-research==2.1.0
+tzdata==2026.3
