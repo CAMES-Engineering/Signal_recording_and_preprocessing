@@ -44,7 +44,7 @@ The scripts currently assume a **Windows** environment because they use:
 Install the required Python packages:
 
 ```bash
-pip install tobii-research pyserial numpy pyshimmer keyboard readchar
+pip install -r requirements.txt
 ```
 
 Depending on your Tobii installation, the `tobii-research` package may need to be installed using Tobii's own SDK distribution.
