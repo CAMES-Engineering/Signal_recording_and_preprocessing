@@ -62,6 +62,33 @@ For each session, the following files will typically be generated in the `Data/P
 - `LogFile.txt`: The session synchronization log.
 - Associated GSR/ECG CSV files.
 
+### Event Annotation
+Session recordings were annotated post-collection using the ELAN annotation tool. 
+For each participant, a `.txt` marker file specifies the start and end times (in seconds from recording onset) of each task, exploration period, and feedback 
+phase. These markers are used in subsequent preprocessing to segment physiological signals into task-relevant windows and to identify exploration periods for feature 
+extraction.
+
+### Eye-Tracking Preprocessing
+Raw gaze data (`gaze_data.csv`) is preprocessed through the following steps:
+
+1. **Gaze Marking** — Event marker files are aligned to the gaze data using 
+   Unix timestamps, and each gaze sample is labelled with its corresponding 
+   task and exploration period.
+2. **Fixation and Saccade Detection** — Fixations are detected using the I2MC 
+   algorithm. Saccades are subsequently extracted from inter-fixation intervals 
+   using a main-sequence-based classification criterion; only forward saccades 
+   are retained.
+3. **Pupil Preprocessing** — The raw pupil signal is cleaned through validity 
+   masking, blink detection with temporal padding, binocular averaging, spike 
+   removal, linear interpolation of short gaps, and Savitzky-Golay smoothing.
+4. **Feature Extraction** — Eye-tracking features are extracted exclusively from 
+   exploration periods and aggregated per task per participant. Features are 
+   z-scored within each participant to account for individual differences.
+
+### GSR Preprocessing
+Raw GSR signals are preprocessed through spike suppression, low-pass filtering, task-based segmentation, and per-task baseline correction. Tonic and phasic 
+components are decomposed using the cvxEDA algorithm. Features are extracted from exploration periods and z-scored within each participant.
+
 ### Generating Heatmaps
 
 After a recording session, you can visualize the gaze data by generating a cumulative heatmap video:
