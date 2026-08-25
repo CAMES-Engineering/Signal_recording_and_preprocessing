@@ -8,6 +8,7 @@ This repository contains tools for the synchronized recording and preprocessing 
 - **Multiprocessing Architecture**: Utilizes Python's `multiprocessing` to handle high-frequency data streams in parallel, ensuring accurate timing and preventing bottlenecks.
 - **Automated Video Capture**: Integrates with FFmpeg for low-overhead, hardware-accelerated video recording (e.g., screen capture and a hand/environment camera).
 - **Synchronized Logging**: Maintains a centralized log file (`LogFile.txt`) that timestamps all recording events and hardware landmarks, allowing for precise data alignment during analysis.
+- **Heatmap Generation**: Includes a script (`make_heatmap.py`) for generating cumulative heatmap videos from recorded gaze data.
 - **Preprocessing Pipelines**: Includes dedicated modules for preprocessing eye-tracking and GSR data.
 
 ## Hardware Requirements
@@ -35,6 +36,7 @@ Key Python dependencies include:
 - `tobii-research` for Tobii eye-tracker integration
 - `numpy` & `pandas` for data handling
 - `pyserial` for serial port management
+- `opencv-python` (cv2) for heatmap generation
 
 ## Usage
 
@@ -55,7 +57,15 @@ python main.py
 ### Data Output
 
 For each session, the following files will typically be generated in the `Data/Procedure_X/` folder:
-- `gaze_data.csv`: Raw eye-tracking data.
+- `gaze_data.csv` (or `gaze_minimal.csv`): Raw eye-tracking data.
 - `screen.mp4` / `hand.mp4`: Recorded video streams.
 - `LogFile.txt`: The session synchronization log.
 - Associated GSR/ECG CSV files.
+
+### Generating Heatmaps
+
+After a recording session, you can visualize the gaze data by generating a cumulative heatmap video:
+
+```bash
+python make_heatmap.py
+```
