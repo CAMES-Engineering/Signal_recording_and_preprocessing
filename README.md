@@ -96,3 +96,68 @@ After a recording session, you can visualize the gaze data by generating a cumul
 ```bash
 python make_heatmap.py
 ```
+## Deposited Data
+
+The data supporting this study are available at: https://doi.org/10.5281/zenodo.20553390
+
+### Raw Data (P01–P20)
+Each participant folder contains the raw outputs from a single recording session:
+- `gsr_record.csv` — raw GSR recording from the Shimmer3 GSR+ device
+- `gaze_data.csv` — raw gaze data recorded at 90 Hz from the Tobii Eye Tracker 4C
+- `screen.mp4` — screen recording used for ELAN task annotation
+
+Three participants are excluded from eye-tracking analyses: P10 (gaze validity below the 75% threshold), P11 and P13 (device malfunction). Six task-participant combinations are excluded from GSR analyses due to recording interruptions or signal instability. Full exclusion details are provided in the manuscript.
+
+### eye_features.csv
+Preprocessed task-level eye-tracking features for 17 participants across 9 tasks (148 participant-task rows). Each row corresponds to one participant-task observation extracted from exploration periods. Raw and within-participant z-scored values are provided for each feature; z-scored columns are indicated by the `_z` suffix.
+
+| Column | Description |
+|--------|-------------|
+| participant | Anonymized participant ID (P01–P20) |
+| task_label | Task identifier (see Task Label Mapping below) |
+| task_duration_s | Exploration duration (seconds) |
+| pupil_mean_bc | Baseline-corrected mean pupil diameter (mm) |
+| pupil_slope | Linear slope of pupil diameter over exploration period |
+| blink_time_frac | Fraction of exploration time spent blinking |
+| blink_per_min | Blink rate (blinks/min) |
+| pupil_valid_pct | Percentage of valid pupil samples |
+| fix_count | Number of fixations |
+| fix_rate_hz | Fixation rate (Hz) |
+| fix_dur_mean_s | Mean fixation duration (seconds) |
+| fix_dur_std_s | Standard deviation of fixation duration (seconds) |
+| fix_dur_total_s | Total fixation time (seconds) |
+| sac_count | Number of forward saccades |
+| sac_rate_hz | Forward saccade rate (Hz) |
+| sac_amp_mean_px | Mean forward saccade amplitude (pixels) |
+| sac_amp_std_px | Standard deviation of forward saccade amplitude (pixels) |
+
+### gsr_features.csv
+Preprocessed task-level GSR features for all 20 participants across 9 tasks (154 participant-task rows). Each row corresponds to one participant-task observation extracted from exploration periods, with per-task median baseline correction applied using the 60-second window preceding task onset. Raw and within-participant z-scored values are provided for each feature; z-scored columns are indicated by the `_z` suffix.
+
+| Column | Description |
+|--------|-------------|
+| participant | Anonymized participant ID (P01–P20) |
+| task_id | Task identifier (see Task Label Mapping below) |
+| n_explorations | Number of exploration sub-periods within the task |
+| total_duration_s | Total exploration duration (seconds) |
+| tonic_mean_uS | Mean tonic EDA conductance (µS) |
+| tonic_slope | Linear slope of tonic conductance over exploration period |
+| scr_count | Number of discrete SCRs detected |
+| scr_rate | SCR rate (SCRs per second) |
+| scr_amp_mean | Mean SCR amplitude (µS) |
+| scr_amp_sum | Summed SCR amplitude (µS) |
+| bc_mean_uS | Baseline-corrected mean conductance (µS) |
+
+### Task Label Mapping
+
+| Task Label | Module | Description |
+|------------|--------|-------------|
+| task1_5_2 | Obstetrics 20 Weeks | Abdominal circumference measurement |
+| task1_6_2 | Obstetrics 20 Weeks | Femur length measurement |
+| task2_2_1 | Obstetrics Fetal Growth | Head circumference and biparietal diameter |
+| task2_5_1 | Obstetrics Fetal Growth | Femur length measurement |
+| task3_1_1 | Fetal Anomaly Survey | Biparietal diameter and head circumference |
+| task3_3_1 | Fetal Anomaly Survey | Transcerebellar view |
+| task3_4_2 | Fetal Anomaly Survey | Abdominal circumference measurement |
+| task3_8_2 | Fetal Anomaly Survey | Fetal kidneys |
+| task3_8_3 | Fetal Anomaly Survey | Femur length measurement |
